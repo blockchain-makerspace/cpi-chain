@@ -57,7 +57,7 @@ pub type BlockNumber = u64;
 /// Index of an account's extrinsic in the chain.
 pub type Nonce = u64;
 
-/// Used for the module oracle in `./oracle.rs`
+/// Oracle module, which is used to get off-chain data on-chain.
 mod oracle;
 
 /// Opaque types. These are used by the CLI to instantiate machinery that don't need to know

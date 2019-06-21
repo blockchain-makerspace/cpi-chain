@@ -1,8 +1,8 @@
 use parity_codec::{Decode, Encode};
+use rand::random;
 #[cfg(feature = "std")]
 use support::{decl_event, decl_module, decl_storage, dispatch::Result, StorageValue};
 use system::ensure_root;
-use system::ensure_signed;
 
 /// The module's configuration trait.
 pub trait Trait: system::Trait {
@@ -110,6 +110,17 @@ mod tests {
             assert_ok!(Oracle::do_something(Origin::signed(1), 42));
             // asserting that the stored value is equal to what we stored
             assert_eq!(Oracle::something(), Some(42));
+        });
+    }
+
+    #[test]
+    fn it_can_set_and_get_random_values() {
+        with_externalities(&mut new_test_ext(), || {
+            let cpiPrice: u64 = rand::random::<u64>();
+            // Set price to storage
+            assert_ok!(Oracle::set(Origin::ROOT, price));
+            // Get price from storage
+            assert_eq!(<CpiPrice<T>>::get(), price);
         });
     }
 }

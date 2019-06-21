@@ -21,6 +21,10 @@ std = [
     'consensus-aura/std',
     'offchain-primitives/std',
 ]
+
+[dependencies]
+rand = "0.6.5"
+
 [dependencies.aura]
 default_features = false
 git = 'https://github.com/paritytech/substrate.git'

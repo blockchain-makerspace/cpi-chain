@@ -5,6 +5,7 @@
 // `construct_runtime!` does a lot of recursion and requires us to increase the limit to 256.
 #![recursion_limit = "256"]
 
+use assets;
 use client::{
     block_builder::api::{self as block_builder_api, CheckInherentsResult, InherentData},
     impl_runtime_apis, runtime_api,
@@ -57,6 +58,8 @@ pub type BlockNumber = u64;
 /// Index of an account's extrinsic in the chain.
 pub type Nonce = u64;
 
+/// Consumer index
+mod cpic;
 /// Oracle module, which is used to get auction off CDPs.
 mod exchange;
 /// Oracle module, which is used to get off-chain data on-chain.
@@ -189,6 +192,14 @@ impl balances::Trait for Runtime {
     type TransferPayment = ();
 }
 
+impl assets::Trait for Runtime {
+    /// The overarching event type.
+    type Event = Event;
+
+    /// The units in which we record balances.
+    type Balance = u64;
+}
+
 impl sudo::Trait for Runtime {
     /// The uniquitous event type.
     type Event = Event;
@@ -205,6 +216,11 @@ impl exchange::Trait for Runtime {
     type Event = Event;
 }
 
+/// Used for the module cpic in `./cpic.rs`
+impl cpic::Trait for Runtime {
+    type Event = Event;
+}
+
 construct_runtime!(
 	pub enum Runtime with Log(InternalLog: DigestItem<Hash, AuthorityId, AuthoritySignature>) where
 		Block = Block,
@@ -214,12 +230,14 @@ construct_runtime!(
 		System: system::{default, Log(ChangesTrieRoot)},
 		Timestamp: timestamp::{Module, Call, Storage, Config<T>, Inherent},
 		Consensus: consensus::{Module, Call, Storage, Config<T>, Log(AuthoritiesChange), Inherent},
+        Assets: assets::{Module, Call, Storage, Event<T>},
 		Aura: aura::{Module},
 		Indices: indices,
 		Balances: balances,
 		Sudo: sudo,
         Oracle: oracle::{Module, Call, Storage, Event<T>},
         Exchange: exchange::{Module, Call, Storage, Event<T>},
+        Cpic: cpic::{Module, Call, Storage, Event<T>},
 	}
 );
 

@@ -7,6 +7,7 @@ std = [
     'rstd/std',
     'runtime-io/std',
     'support/std',
+    'assets/std',
     'balances/std',
     'executive/std',
     'aura/std',
@@ -24,6 +25,12 @@ std = [
 
 [dependencies]
 rand = "0.6.5"
+
+[dependencies.assets]
+default_features = false
+git = 'https://github.com/paritytech/substrate.git'
+package = 'srml-assets'
+rev = '047e887d1191aa0b85f46570a432c5665bfc1b02'
 
 [dependencies.aura]
 default_features = false

@@ -107,7 +107,6 @@ mod tests {
             // Set price to storage
             assert_ok!(oracle::set(Origin::ROOT, price));
             // Get price from storage
-            // assert_eq!(oracle::<CpiPrice<T>>::get(), price);
             assert_eq!(oracle::price(), price);
         });
     }

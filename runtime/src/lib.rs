@@ -222,11 +222,11 @@ impl cpic::Trait for Runtime {
 }
 
 construct_runtime!(
-	pub enum Runtime with Log(InternalLog: DigestItem<Hash, AuthorityId, AuthoritySignature>) where
-		Block = Block,
-		NodeBlock = opaque::Block,
-		UncheckedExtrinsic = UncheckedExtrinsic
-	{
+    pub enum Runtime with Log(InternalLog: DigestItem<Hash, AuthorityId, AuthoritySignature>) where
+        Block = Block,
+        NodeBlock = opaque::Block,
+        UncheckedExtrinsic = UncheckedExtrinsic
+    {
         System: system::{default, Log(ChangesTrieRoot)},
         Timestamp: timestamp::{Module, Call, Storage, Config<T>, Inherent},
         Consensus: consensus::{Module, Call, Storage, Config<T>, Log(AuthoritiesChange), Inherent},
@@ -238,7 +238,7 @@ construct_runtime!(
         Oracle: oracle::{Module, Call, Storage, Event<T>},
         Exchange: exchange::{Module, Call, Storage, Event<T>},
         Cpic: cpic::{Module, Call, Storage, Event<T>},
-	}
+    }
 );
 
 /// The type used as a helper for interpreting the sender of transactions.

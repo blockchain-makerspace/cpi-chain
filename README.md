@@ -91,3 +91,11 @@ cargo run -- \
   --telemetry-url ws://telemetry.polkadot.io:1024 \
   --validator
 ```
+
+# UI
+
+On <https://polkadot.js.org/apps/#/settings/developer> add:
+
+    {
+      "AssetId": "u32"
+    }

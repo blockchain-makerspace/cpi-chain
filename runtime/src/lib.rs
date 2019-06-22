@@ -197,7 +197,7 @@ impl assets::Trait for Runtime {
     type Event = Event;
 
     /// The units in which we record balances.
-    type Balance = u64;
+    type Balance = u128;
 }
 
 impl sudo::Trait for Runtime {

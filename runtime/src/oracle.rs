@@ -1,6 +1,5 @@
-use parity_codec::{Decode, Encode};
-use rand::random;
 #[cfg(feature = "std")]
+use rand::random;
 use support::{decl_event, decl_module, decl_storage, dispatch::Result, StorageValue};
 use system::ensure_root;
 
@@ -12,9 +11,8 @@ pub trait Trait: system::Trait {
 
 /// This module's storage items.
 decl_storage! {
-    trait Store for Module<T: Trait> as Oracle {
-        // Store Cpi price in storage
-        CpiPrice: u64;
+    trait Store for Module<T: Trait> as oracle {
+        CpiPrice: Option<u64>;
     }
 }
 
@@ -90,7 +88,7 @@ mod tests {
     impl Trait for Test {
         type Event = ();
     }
-    type Oracle = Module<Test>;
+    type oracle = Module<Test>;
 
     // This function basically just builds a genesis storage key/value store according to
     // our desired mockup.
@@ -100,17 +98,6 @@ mod tests {
             .unwrap()
             .0
             .into()
-    }
-
-    #[test]
-    fn it_works_for_default_value() {
-        with_externalities(&mut new_test_ext(), || {
-            // Just a dummy test for the dummy funtion `do_something`
-            // calling the `do_something` function with a value 42
-            assert_ok!(Oracle::do_something(Origin::signed(1), 42));
-            // asserting that the stored value is equal to what we stored
-            assert_eq!(Oracle::something(), Some(42));
-        });
     }
 
     #[test]

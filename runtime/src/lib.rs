@@ -57,6 +57,8 @@ pub type BlockNumber = u64;
 /// Index of an account's extrinsic in the chain.
 pub type Nonce = u64;
 
+/// Oracle module, which is used to get auction off CDPs.
+mod exchange;
 /// Oracle module, which is used to get off-chain data on-chain.
 mod oracle;
 
@@ -198,6 +200,11 @@ impl oracle::Trait for Runtime {
     type Event = Event;
 }
 
+/// Used for the module exchange in `./exchange.rs`
+impl exchange::Trait for Runtime {
+    type Event = Event;
+}
+
 construct_runtime!(
 	pub enum Runtime with Log(InternalLog: DigestItem<Hash, AuthorityId, AuthoritySignature>) where
 		Block = Block,
@@ -211,8 +218,8 @@ construct_runtime!(
 		Indices: indices,
 		Balances: balances,
 		Sudo: sudo,
-		// Used for the module oracle in `./oracle.rs`
-		Oracle: oracle::{Module, Call, Storage, Event<T>},
+        Oracle: oracle::{Module, Call, Storage, Event<T>},
+        Exchange: exchange::{Module, Call, Storage, Event<T>},
 	}
 );
 

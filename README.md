@@ -66,3 +66,28 @@ cargo run -- \
 ```
 
 Additional CLI usage options are available and may be shown by running `cargo run -- --help`.
+
+# Testnet
+
+<https://telemetry.polkadot.io/#list/CPI%20Chain>
+
+```bash
+cargo run -- \
+  --base-path /tmp/alice \
+  --chain=cpi_chain \
+  --alice \
+  --node-key 0000000000000000000000000000000000000000000000000000000000000001 \
+  --telemetry-url ws://telemetry.polkadot.io:1024 \
+  --validator
+```
+
+```bash
+cargo run -- \
+  --base-path /tmp/bob \
+  --bootnodes /ip4/127.0.0.1/tcp/30333/p2p/QmQZ8TjTqeDj3ciwr93EJ95hxfDsb9pEYDizUAbWpigtQN \
+  --chain=cpi_chain \
+  --bob \
+  --port 30334 \
+  --telemetry-url ws://telemetry.polkadot.io:1024 \
+  --validator
+```

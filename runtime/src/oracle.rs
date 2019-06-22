@@ -12,7 +12,7 @@ pub trait Trait: system::Trait {
 /// This module's storage items.
 decl_storage! {
     trait Store for Module<T: Trait> as oracle {
-        CpiPrice: Option<u64>;
+        CpiPrice get(price): Option<u64>;
     }
 }
 
@@ -103,11 +103,12 @@ mod tests {
     #[test]
     fn it_can_set_and_get_random_values() {
         with_externalities(&mut new_test_ext(), || {
-            let cpiPrice: u64 = rand::random::<u64>();
+            let price: u64 = rand::random::<u64>();
             // Set price to storage
-            assert_ok!(Oracle::set(Origin::ROOT, price));
+            assert_ok!(oracle::set(Origin::ROOT, price));
             // Get price from storage
-            assert_eq!(<CpiPrice<T>>::get(), price);
+            // assert_eq!(oracle::<CpiPrice<T>>::get(), price);
+            assert_eq!(oracle::price(), price);
         });
     }
 }

@@ -58,14 +58,17 @@ decl_module! {
              // ensure!(!COUNT_AIRDROP_RECIPIENTS.is_zero(), "Divide by zero error.");
 
              let sender = ensure_signed(origin)?;
-             let asset_id = Self::next_asset_id();
+             // let asset_id = Self::next_asset_id();
 
              // <NextAssetId<T>>::mutate(|asset_id| *asset_id += 1);
-             <Balances<T>>::insert((asset_id, &ACCOUNT_ALICE), TOKENS_FIXED_SUPPLY / COUNT_AIRDROP_RECIPIENTS);
-             <Balances<T>>::insert((asset_id, &ACCOUNT_BOB), TOKENS_FIXED_SUPPLY / COUNT_AIRDROP_RECIPIENTS);
-             <TotalSupply<T>>::insert(asset_id, TOKENS_FIXED_SUPPLY);
+             // <assets::Module<T>>::issue(origin, TOKENS_FIXED_SUPPLY / COUNT_AIRDROP_RECIPIENTS);
+             <assets::Module<T>>::total_supply(1);
 
-             Self::deposit_event(RawEvent::Issued(asset_id, sender, TOKENS_FIXED_SUPPLY));
+             // <Balances<T>>::insert((asset_id, &ACCOUNT_ALICE), TOKENS_FIXED_SUPPLY / COUNT_AIRDROP_RECIPIENTS);
+             // <Balances<T>>::insert((asset_id, &ACCOUNT_BOB), TOKENS_FIXED_SUPPLY / COUNT_AIRDROP_RECIPIENTS);
+             // <TotalSupply<T>>::insert(asset_id, TOKENS_FIXED_SUPPLY);
+             //
+             // Self::deposit_event(RawEvent::Issued(asset_id, sender, TOKENS_FIXED_SUPPLY));
              Ok(())
         }
     }

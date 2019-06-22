@@ -99,3 +99,8 @@ On <https://polkadot.js.org/apps/#/settings/developer> add:
     {
       "AssetId": "u32"
     }
+
+See also
+
+-   <https://github.com/paritytech/substrate/blob/v1.0/srml/assets/src/lib.rs#L34> and
+-   <https://substrate.dev/substrate-collectables-workshop/#/1/viewing-a-structure>

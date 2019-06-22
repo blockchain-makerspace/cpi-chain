@@ -37,5 +37,5 @@ if [ -z "$DEBUG_BUILD" ]; then
     RELEASE="--release"
 fi
 
-../build.sh
+./build.sh
 cargo build $RELEASE

@@ -85,7 +85,13 @@ impl Alternative {
                 "cpi_chain",
                 || {
                     cpi_chain_genesis(
-                        vec![authority_key("Alice"), authority_key("Bob")],
+                        vec![
+                            authority_key("Alice"),
+                            authority_key("Bob"),
+                            authority_key("Charlie"),
+                            authority_key("Dave"),
+                            authority_key("Eve"),
+                        ],
                         vec![
                             account_key("Alice"),
                             account_key("Bob"),
